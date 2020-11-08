@@ -87,29 +87,23 @@ skip
          .bend
 ;---------------------------------------
 starsound
-         .block
          ; Produce the sound of falling
          ; shooting stars.
-
          lda #15
          sta sid+24 ; volume
          lda #0*16+5
          sta sid+5  ; attack+decay
-         lda #15*16+8
+         lda #15*16+10
          sta sid+6  ; sustain+release
+         ldx #200
+         sta sid
+         ldx #2
+         sta sid+1
          lda #1+128
          sta sid+4  ; noise gen on
-         ldx #200
-loop
-         txa
-         sta sid
-         dex
-         cpx #80
-         bne loop
          lda #128
          sta sid+4  ; noise gen off
          rts
-         .bend
 ;---------------------------------------
 print_star
          ; Draw the falling shooting
@@ -425,4 +419,3 @@ init_keyb
          rts
 
          .end
-
